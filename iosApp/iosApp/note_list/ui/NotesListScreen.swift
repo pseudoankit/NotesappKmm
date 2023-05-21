@@ -10,7 +10,6 @@ import SwiftUI
 import shared
 
 struct NotesListScreen: View {
-    
     private var notesRepository: NotesRepository
     @StateObject var viewModel = NotesListViewModel(notesRepository: nil)
     
@@ -27,25 +26,23 @@ struct NotesListScreen: View {
                 NavigationLink(destination: NoteDetailScreen(
                     noteRepository: notesRepository,
                     noteId: selectedNoteId
-                ), isActive: $isNoteSelected) {
+                ),
+               isActive: $isNoteSelected) {
                     EmptyView()
                 }.hidden()
-                
-                HideableSearchTextField<EmptyView>(
-                    onSearchToggled: {
-                        viewModel.toggleIsSearchActive()
-                    },
-                    desintationProvider: {
-                        EmptyView()
-                    },
-                    isSearchActive: viewModel.isSearchActive,
-                    searchText: $viewModel.searchText
-                )
+                HideableSearchTextField<NoteDetailScreen>(onSearchToggled: {
+                    viewModel.toggleIsSearchActive()
+                }, destinationProvider: {
+                    NoteDetailScreen(
+                        noteRepository: notesRepository,
+                        noteId: selectedNoteId
+                    )
+                }, isSearchActive: viewModel.isSearchActive, searchText: $viewModel.searchText)
                 .frame(maxWidth: .infinity, minHeight: 40)
                 .padding()
                 
                 if !viewModel.isSearchActive {
-                    Text("All Notes")
+                    Text("All notes")
                         .font(.title2)
                 }
             }
@@ -58,7 +55,7 @@ struct NotesListScreen: View {
                     }) {
                         NoteItem(
                             note: note,
-                            onNoteDeleteClicked: {
+                            onNoteDeleteClicked : {
                                 viewModel.deleteNoteById(id: note.id?.int64Value)
                             }
                         )

@@ -17,6 +17,7 @@
 		EF4674802A19E72F006317F9 /* NoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF46747F2A19E72F006317F9 /* NoteItem.swift */; };
 		EF4674822A19E92E006317F9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4674812A19E92E006317F9 /* Colors.swift */; };
 		EF4674852A19F95E006317F9 /* NoteDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4674842A19F95E006317F9 /* NoteDetailScreen.swift */; };
+		EF4674882A19FC6F006317F9 /* NoteDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4674872A19FC6F006317F9 /* NoteDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		EF46747F2A19E72F006317F9 /* NoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteItem.swift; sourceTree = "<group>"; };
 		EF4674812A19E92E006317F9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EF4674842A19F95E006317F9 /* NoteDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailScreen.swift; sourceTree = "<group>"; };
+		EF4674872A19FC6F006317F9 /* NoteDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,9 +129,18 @@
 		EF4674832A19F94C006317F9 /* note_detail */ = {
 			isa = PBXGroup;
 			children = (
-				EF4674842A19F95E006317F9 /* NoteDetailScreen.swift */,
+				EF4674862A19FC34006317F9 /* ui */,
+				EF4674872A19FC6F006317F9 /* NoteDetailViewModel.swift */,
 			);
 			path = note_detail;
+			sourceTree = "<group>";
+		};
+		EF4674862A19FC34006317F9 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				EF4674842A19F95E006317F9 /* NoteDetailScreen.swift */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 				EF4674852A19F95E006317F9 /* NoteDetailScreen.swift in Sources */,
 				EF46747B2A19DFBE006317F9 /* NotesListScreen.swift in Sources */,
 				EF4674822A19E92E006317F9 /* Colors.swift in Sources */,
+				EF4674882A19FC6F006317F9 /* NoteDetailViewModel.swift in Sources */,
 				EF4674792A19DF9C006317F9 /* NotesListViewModel.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				EF46747E2A19E2EB006317F9 /* HideableSearchTextField.swift in Sources */,
