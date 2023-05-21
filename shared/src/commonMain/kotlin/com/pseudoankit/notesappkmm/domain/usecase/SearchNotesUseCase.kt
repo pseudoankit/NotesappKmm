@@ -5,7 +5,7 @@ import com.pseudoankit.notesappkmm.util.DateTimeUtil
 
 class SearchNotesUseCase {
 
-    fun execute(notes: List<Note>, query: String): List<Note> {
+    operator fun invoke(notes: List<Note>, query: String): List<Note> {
         if (query.isBlank()) return notes
 
         return notes.filter {

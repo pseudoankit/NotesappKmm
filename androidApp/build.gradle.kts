@@ -47,5 +47,11 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.4.3")
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.activity:activity-compose:1.7.1")
+    implementation("androidx.navigation:navigation-runtime-ktx:2.5.3")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+
+    implementation("io.insert-koin:koin-core:3.2.2")
+    implementation("io.insert-koin:koin-android:3.2.2")
+    implementation("io.insert-koin:koin-androidx-compose:3.2.1")
 }
