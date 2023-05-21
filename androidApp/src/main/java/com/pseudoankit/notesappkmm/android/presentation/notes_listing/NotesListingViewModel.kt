@@ -12,7 +12,6 @@ class NotesListingViewModel(
     private val searchNotesUseCase: SearchNotesUseCase
 ) : ViewModel() {
 
-
     val state = mutableStateOf(NotesListingState())
 
 //    TODO do via save state handle
