@@ -41,7 +41,7 @@ class NotesListingViewModel(
     fun onSearchTextChange(text: String) {
         setState {
             copy(
-                searchText = searchText,
+                searchText = text,
                 notes = searchNotesUseCase(notes, searchText)
             )
         }
