@@ -1,4 +1,4 @@
-package com.pseudoankit.notesappkmm.android
+package com.pseudoankit.notesappkmm.android.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
