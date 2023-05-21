@@ -15,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,7 +29,7 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NoteListScreen(
-//    navController: NavController,
+    navController: NavController,
     viewModel: NotesListingViewModel = getViewModel()
 ) {
     val state by viewModel.state
@@ -43,7 +42,7 @@ fun NoteListScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-//                    navController.navigate("note_detail/-1L")
+                    navController.navigate("note_detail/-1L")
                 },
                 backgroundColor = Color.Black
             ) {
@@ -97,7 +96,7 @@ fun NoteListScreen(
                         note = note,
                         backgroundColor = Color(note.colorHex),
                         onNoteClick = {
-//                            navController.navigate("note_detail/${note.id}")
+                            navController.navigate("note_detail/${note.id}")
                         },
                         onDeleteClick = {
                             viewModel.deleteNoteById(note.id!!)
