@@ -17,5 +17,7 @@ fun unLoadNotesDetailModules() {
 
 private val modules = module {
     factory<NotesRepository> { NotesRepositoryImpl(get()) }
-    viewModel { NoteDetailViewModel(get()) }
+    viewModel { (id: Long) ->
+        NoteDetailViewModel(get(), id)
+    }
 }

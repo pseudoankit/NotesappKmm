@@ -19,6 +19,6 @@ data class Note(
         private val colors =
             listOf(RedOrangeHex, RedPinkHex, BabyBlueHex, VioletHex, LightGreenHex)
 
-        fun generateRandomColors() = colors.random()
+        fun generateRandomColor() = colors.random()
     }
 }

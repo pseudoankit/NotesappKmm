@@ -23,12 +23,13 @@ import androidx.navigation.NavController
 import com.pseudoankit.notesappkmm.android.presentation.notes_detail.NoteDetailViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun NoteDetailScreen(
     noteId: Long,
     navController: NavController,
-    viewModel: NoteDetailViewModel = getViewModel()
+    viewModel: NoteDetailViewModel = getViewModel { parametersOf(noteId) }
 ) {
     val state by viewModel.state
 
@@ -66,7 +67,11 @@ fun NoteDetailScreen(
                 hint = "Enter a title...",
                 onValueChanged = viewModel::onNoteTitleChanged,
                 singleLine = true,
-                textStyle = TextStyle(fontSize = 20.sp)
+                textStyle = TextStyle(fontSize = 20.sp),
+                onFocusChanged = {
+                    viewModel.onNoteTitleFocusChanged(it.isFocused)
+                },
+                isHintVisible = state.isTitleHintVisible
             )
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
@@ -75,7 +80,11 @@ fun NoteDetailScreen(
                 onValueChanged = viewModel::onNoteContentChanged,
                 singleLine = false,
                 textStyle = TextStyle(fontSize = 20.sp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                isHintVisible = state.isContentHintVisible,
+                onFocusChanged = {
+                    viewModel.onNoteContentFocusChanged(it.isFocused)
+                }
             )
         }
     }

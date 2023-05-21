@@ -13,13 +13,31 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 class NoteDetailViewModel(
-    private val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
+    id: Long
 ) : ViewModel() {
 
     val state = mutableStateOf(NoteDetailState())
     val sideEffect = MutableSharedFlow<NoteDetailSideEffect>()
 
-    private var existingNoteId: Long? = null
+    private var existingNoteId: Long? = if (id >= 0) id else null
+
+    init {
+        updateDetailForExistingNoteId(id)
+    }
+
+    private fun updateDetailForExistingNoteId(id: Long) {
+        viewModelScope.launch {
+            val note = notesRepository.getNoteById(id) ?: return@launch
+            state.setState {
+                copy(
+                    noteTitle = note.title,
+                    noteContent = note.content,
+                    noteColor = note.colorHex
+                )
+            }
+        }
+    }
 
     fun onNoteTitleChanged(text: String) {
         state.setState { copy(noteTitle = text) }
@@ -36,7 +54,7 @@ class NoteDetailViewModel(
                     id = existingNoteId,
                     title = state.value.noteTitle,
                     content = state.value.noteContent,
-                    colorHex = state.value.noteColor,
+                    colorHex = if (existingNoteId == null) Note.generateRandomColor() else state.value.noteColor,
                     createdAt = DateTimeUtil.now()
                 )
             )
@@ -46,5 +64,15 @@ class NoteDetailViewModel(
         }
     }
 
+    fun onNoteTitleFocusChanged(isFocused: Boolean) {
+        state.setState {
+            copy(isNoteTitleFocused = isFocused)
+        }
+    }
 
+    fun onNoteContentFocusChanged(isFocused: Boolean) {
+        state.setState {
+            copy(isNoteContentFocused = isFocused)
+        }
+    }
 }
