@@ -4,6 +4,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pseudoankit.notesappkmm.android.presentation.notes_detail.ui.NoteDetailSideEffect
+import com.pseudoankit.notesappkmm.android.presentation.util.postSideEffect
+import com.pseudoankit.notesappkmm.android.presentation.util.setState
 import com.pseudoankit.notesappkmm.domain.model.Note
 import com.pseudoankit.notesappkmm.domain.repository.NotesRepository
 import com.pseudoankit.notesappkmm.util.DateTimeUtil
@@ -20,11 +22,11 @@ class NoteDetailViewModel(
     private var existingNoteId: Long? = null
 
     fun onNoteTitleChanged(text: String) {
-        setState { copy(noteTitle = text) }
+        state.setState { copy(noteTitle = text) }
     }
 
     fun onNoteContentChanged(text: String) {
-        setState { copy(noteContent = text) }
+        state.setState { copy(noteContent = text) }
     }
 
     fun saveNote() {
@@ -38,17 +40,11 @@ class NoteDetailViewModel(
                     createdAt = DateTimeUtil.now()
                 )
             )
-            postSideEffect {
+            sideEffect.postSideEffect {
                 NoteDetailSideEffect.NavigateBack
             }
         }
     }
 
-    private inline fun setState(block: NoteDetailState.() -> NoteDetailState) {
-        state.value = state.value.block()
-    }
 
-    private suspend inline fun postSideEffect(block: () -> NoteDetailSideEffect) {
-        sideEffect.emit(block())
-    }
 }

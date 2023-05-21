@@ -3,6 +3,7 @@ package com.pseudoankit.notesappkmm.android.presentation.notes_listing
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pseudoankit.notesappkmm.android.presentation.util.setState
 import com.pseudoankit.notesappkmm.domain.repository.NotesRepository
 import com.pseudoankit.notesappkmm.domain.usecase.SearchNotesUseCase
 import kotlinx.coroutines.launch
@@ -13,6 +14,7 @@ class NotesListingViewModel(
 ) : ViewModel() {
 
     val state = mutableStateOf(NotesListingState())
+    private suspend fun dbNotes() = notesRepository.getAllNotes()
 
 //    TODO do via save state handle
 //    private val notes = savedStateHandle.getStateFlow("notes", emptyList<Note>())
@@ -29,25 +31,27 @@ class NotesListingViewModel(
 
     fun loadNotes() {
         viewModelScope.launch {
-            setState {
+            state.setState {
                 copy(
-                    notes = notesRepository.getAllNotes()
+                    notes = dbNotes()
                 )
             }
         }
     }
 
     fun onSearchTextChange(text: String) {
-        setState {
-            copy(
-                searchText = text,
-                notes = searchNotesUseCase(notes, searchText)
-            )
+        viewModelScope.launch {
+            state.setState {
+                copy(
+                    searchText = text,
+                    notes = searchNotesUseCase(dbNotes(), text)
+                )
+            }
         }
     }
 
     fun onToggleSearch() {
-        setState {
+        state.setState {
             copy(
                 isSearchActive = !isSearchActive
             )
@@ -62,9 +66,5 @@ class NotesListingViewModel(
             notesRepository.deleteNoteById(id)
             loadNotes()
         }
-    }
-
-    private inline fun setState(block: NotesListingState.() -> NotesListingState) {
-        state.value = state.value.block()
     }
 }

@@ -1,24 +1,21 @@
-package com.pseudoankit.notesappkmm.android.di
+package com.pseudoankit.notesappkmm.android.presentation.notes_detail
 
-import com.pseudoankit.notesappkmm.android.presentation.notes_listing.NotesListingViewModel
 import com.pseudoankit.notesappkmm.data.repository.NotesRepositoryImpl
 import com.pseudoankit.notesappkmm.domain.repository.NotesRepository
-import com.pseudoankit.notesappkmm.domain.usecase.SearchNotesUseCase
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.dsl.module
 
-fun loadNotesListingModules() {
+fun loadNotesDetailModules() {
     loadKoinModules(modules)
 }
 
-fun unLoadNotesListingModules() {
+fun unLoadNotesDetailModules() {
     unloadKoinModules(modules)
 }
 
 private val modules = module {
-    factory { SearchNotesUseCase() }
     factory<NotesRepository> { NotesRepositoryImpl(get()) }
-    viewModel { NotesListingViewModel(get(), get()) }
+    viewModel { NoteDetailViewModel(get()) }
 }

@@ -8,13 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.pseudoankit.notesappkmm.android.di.loadNotesDetailModules
-import com.pseudoankit.notesappkmm.android.di.loadNotesListingModules
-import com.pseudoankit.notesappkmm.android.di.unLoadNotesDetailModules
-import com.pseudoankit.notesappkmm.android.di.unLoadNotesListingModules
+import com.pseudoankit.notesappkmm.android.presentation.notes_detail.loadNotesDetailModules
 import com.pseudoankit.notesappkmm.android.presentation.notes_detail.ui.NoteDetailScreen
+import com.pseudoankit.notesappkmm.android.presentation.notes_detail.unLoadNotesDetailModules
+import com.pseudoankit.notesappkmm.android.presentation.notes_listing.loadNotesListingModules
 import com.pseudoankit.notesappkmm.android.presentation.notes_listing.ui.NoteListScreen
-import com.pseudoankit.notesappkmm.android.presentation.theme.MyApplicationTheme
+import com.pseudoankit.notesappkmm.android.presentation.notes_listing.unLoadNotesListingModules
+import com.pseudoankit.notesappkmm.android.presentation.util.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
